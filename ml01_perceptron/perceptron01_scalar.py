@@ -43,6 +43,7 @@ class Perceptron_Scalar:
         #2.激活函数运算
         y=self.activation_function(self.sum)
         self.y=y                        #后面计算更新梯度要使用
+        #print("输出:%f"%self.y)
         return  self.y                  #返回计算输出
 
     def backward(self,expect_output):
@@ -51,7 +52,7 @@ class Perceptron_Scalar:
         :return:                        无返回值
         '''
         #1.计算每个权重更新相同的部分。
-        delta=-(self.y-expect_output)
+        delta=(self.y-expect_output)
         delta=delta*self.activation_derivative(self.sum)
         delta=self.learn_rate * delta   #学习率
 
@@ -64,6 +65,8 @@ class Perceptron_Scalar:
         #权重的更新梯度
         for idx in range(len(self.w_delta)):
             self.w_delta[idx]=delta*self.input_data[idx]
+
+        #print("权重：{}".format(self.w_delta))
 
         #3.更新权重
         self.bias=self.bias-self.b_delta
@@ -97,8 +100,13 @@ class Perceptron_Scalar_App:
         :param train_label:             训练样本的预期输出
         :return:                        无返回值
         '''
-        for t in range(self.times):     #循环训练
+        for t in range(self.times):             #循环训练
+            print("第%04d轮训练"%(t+1))
             for idx in range(len(train_data)):  #对每个样本数据训练
+                #1.使用感知器对象向前计算结果
+                self.perceptron.forward(train_data[idx])
+                #2.使用感知器向后更新权重
+                self.perceptron.backward(train_label[idx])
 
 
     def predict(self,input_data):
@@ -107,4 +115,37 @@ class Perceptron_Scalar_App:
         :param input_data:              需要分类的特征数据
         :return:                        返回计算结果，结果用于分类
         '''
-        return None                     #返回训练后的计算结果
+        return self.perceptron.forward(input_data)      #返回训练后的计算结果
+
+#1.加载鸢尾花数据
+data,target=datasets.load_iris(return_X_y=True)     #第一个返回值是样本数据，第二个返回值是样本的期望标签
+#取前面100个眼本测试（这100个是线性可分的）
+train_data=data[:100]
+label_data=target[:100]     #第一类是0，第二类是1
+
+#2.构建感知器应用对象
+#激活函数
+activation_function=lambda x:x
+#激活函数导数
+activation_derivative=lambda x:1
+#感知器应用对象
+app=Perceptron_Scalar_App(100000,4,activation_function,activation_derivative,0.0000001)
+
+#3.训练感知器
+app.train(train_data,label_data)
+
+#4.测试感知器(使用训练样本测试)
+correct_counter=0
+#前50个期望标签都是0（近似0.5以下都算正确）
+for item in train_data[:50]:
+    y=app.predict(item)
+    if y<0.5:
+        correct_counter+=1
+#后50个期望标签都是1（近似0.5以上都算正确）
+for item in train_data[50:]:
+    y=app.predict(item)
+    if y>=0.5:
+        correct_counter+=1
+
+#打印正确率：
+print("正确率：%8.2f"%((correct_counter/100.0)*100))
