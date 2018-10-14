@@ -37,11 +37,8 @@ class Perceptron_Scalar:
         '''
         #1.加权求和运算
         self.input_data=input_data      #后面计算更新梯度要使用
-        self.sum=0                      #加权求和后面要使用
-        for idx in range(len(input_data)):
-            self.sum+=self.weights[idx]*input_data[idx]
-        #偏置项
-        self.sum+=self.bias
+        self.sum=np.dot(self.input_data,self.weights)      #加权求和后面要使用
+        self.sum+=self.bias             #偏置项
         #2.激活函数运算
         y=self.activation_function(self.sum)
         self.y=y                        #后面计算更新梯度要使用
@@ -53,27 +50,23 @@ class Perceptron_Scalar:
         :param expect_output:           输入特征数据的期望输出值。
         :return:                        无返回值
         '''
-        #1.计算每个权重更新相同的部分。
+        #1.计算每个权重更新相同的部分(delta在这儿是标量)。
         delta=(self.y-expect_output)
         delta=delta*self.activation_derivative(self.sum)
         delta=self.learn_rate * delta   #学习率
 
         #2.计算每个权重对应的更新梯度（包含偏置项）。
-        self.w_delta=np.zeros(self.weights.shape,np.float32)
+        self.w_delta=np.zeros(self.weights.shape,np.float32)    #向量
         self.b_delta=0
 
         #偏置项的更新梯度
-        self.b_delta=delta
+        self.b_delta=delta      #标量
         #权重的更新梯度
-        for idx in range(len(self.w_delta)):
-            self.w_delta[idx]=delta*self.input_data[idx]
-
-        #print("权重：{}".format(self.w_delta))
+        self.w_delta=delta*self.input_data  #向量（哈马达积）
 
         #3.更新权重
-        self.bias=self.bias-self.b_delta
-        for idx in range(len(self.weights)):
-            self.weights[idx]=self.weights[idx]-self.w_delta[idx]
+        self.bias-=self.b_delta
+        self.weights-=self.w_delta      #形状相同的向量与矩阵的减法
 
 
 class Perceptron_Scalar_App:
@@ -118,6 +111,7 @@ class Perceptron_Scalar_App:
         :return:                        返回计算结果，结果用于分类
         '''
         return self.perceptron.forward(input_data)      #返回训练后的计算结果
+
 import time
 start = time.clock()
 
