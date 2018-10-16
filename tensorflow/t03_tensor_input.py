@@ -13,3 +13,4 @@ session.run(init_op)
 #参数传递
 re=session.run(r,feed_dict={x:10,y:20})
 print(re)
+
