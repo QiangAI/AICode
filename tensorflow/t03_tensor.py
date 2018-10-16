@@ -29,5 +29,3 @@ print(session.run(tf.truediv(x,y)))
 ats=tf.abs(z)
 print(ats.eval(session=session),z.eval(session=session))
 print(tf.truediv(x,y).eval(session=session))
-
-
