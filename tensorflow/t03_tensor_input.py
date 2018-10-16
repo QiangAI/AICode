@@ -14,5 +14,3 @@ session.run(init_op)
 re=session.run(r,feed_dict={x:10,y:20})
 print(re)
 
-
-
