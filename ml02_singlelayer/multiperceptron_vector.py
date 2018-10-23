@@ -159,3 +159,4 @@ for i in range(target_num):
         counter+=1
 
 print("准确率：%8.2f"%(100.0*counter/100))
+
