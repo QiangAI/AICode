@@ -1,0 +1,40 @@
+import matplotlib.pyplot as plt
+#建议不要使用Figure构造器创建Figure对象
+fig=plt.figure('技术趋势图')
+'''
+ax1=fig.add_axes(
+    [0.1,0.1,0.8,0.8],label='趋势图',projection="rectilinear",
+    fc=(1,0,0,1),
+    title="趋势图",
+)
+ax1=fig.add_axes(
+    [0.1,0.1,0.8,0.8],
+    title="趋势图",
+    xlabel='x坐标',ylabel='y坐标',
+    xlim=(0.2,0.6),ylim=(0.4,0.6),
+    xscale='log',yscale='linear',
+)
+
+ax1=fig.add_axes(
+    [0.1,0.1,0.8,0.8],
+    title="趋势图",
+    xlabel='x坐标',ylabel='y坐标',
+    #xlim=(0.2,0.6),ylim=(0.4,0.6),
+    xscale='log',yscale='linear',
+    #xticklabels=['a','b','c'],yticklabels=['A','B','C','D','E','F'],
+    ymargin=-0.2
+)
+'''
+#ticks的使用
+ax1=fig.add_axes(
+    [0.1,0.1,0.8,0.8],
+    title="趋势图",
+    xlabel='x坐标',ylabel='y坐标',
+    xticks=[1,2,3,4,5,6],yticks=[1,2,3],
+    xticklabels=['a','b','c'],
+    #yticklabels=['A','B','C','D','E','F'],
+    ymargin=-0.2
+)
+
+fig.show(warn=False)
+plt.show()

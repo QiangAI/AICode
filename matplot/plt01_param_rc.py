@@ -12,3 +12,4 @@ fig=plt.figure()
 ax = fig.subplots()
 ax.plot([1, 2, 3])
 plt.show()
+
