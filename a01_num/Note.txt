@@ -1,0 +1,7 @@
+核心知识点
+    |-1.ndarray类的使用
+    |-2.Linear algebra代数运算
+    |-3.Mathematical functions数学运算
+    |-4.Statistics统计运算
+    |-5.Random sampling随机采样
+    |-6.Input and output输入输出
