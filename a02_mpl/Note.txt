@@ -1,0 +1,12 @@
+核心知识点：
+    |-Figure
+        |-Axes
+            |-Axis
+                |-tick
+                    |-Locator
+            |-Artist
+            |-Annotation
+            |-Sub-Axes
+            |-Legend
+    |-pyplot
+        |上述的简洁管理方式

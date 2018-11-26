@@ -79,6 +79,7 @@
       <w>minorticklocs</w>
       <w>mollweide</w>
       <w>mouseevent</w>
+      <w>msgpack</w>
       <w>msyh</w>
       <w>nbins</w>
       <w>ncol</w>
@@ -100,6 +101,7 @@
       <w>sharey</w>
       <w>sprintf</w>
       <w>startangle</w>
+      <w>stata</w>
       <w>subplotpars</w>
       <w>symlog</w>
       <w>textcoords</w>
@@ -107,6 +109,7 @@
       <w>ticklabels</w>
       <w>ticklines</w>
       <w>ticklocs</w>
+      <w>usecols</w>
       <w>verticalalignment</w>
       <w>verts</w>
       <w>vmax</w>
